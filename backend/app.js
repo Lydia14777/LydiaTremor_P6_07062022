@@ -49,25 +49,26 @@ mongoose.connect(`mongodb+srv://${process.env.ID}:${process.env.MDP}@${process.e
 const app = express();
 
 //Ajouter des en-têtes ou Header à l'objet res (cors :système de sécurité qui, par défaut, bloque les appels HTTP entre des serveurs différents, ce qui empêche donc les requêtes malveillantes d'accéder à des ressources sensibles)
-/*
-app.use((req, res, next) => {
+
+
+const cors_options = {
+  'origin' : '*',
+  'credentials' : true,
+  'optionsSuccessStatus' : 200,
+  'allowedHeaders' : ['sessionId', 'Content-Type', 'X-Requested-With', 'Content', 'Accept', 'Authorization'],
+  'exposedHeaders' : ['sessionId'],
+  'methods' : 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
+  'preflightContinue' : false
+};
+
+app.use(cors(cors_options));
+/*app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');//* = l'origine c'est tous les utilisateurs
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
 */
-
-const cors_options = {
-  origin : '*',
-  credentials : true,
-  'allowedHeaders' : ['sessionId', 'Content-Type'],
-  'exposedHeaders' : ['sessionId'],
-  'methods' : 'GET, HEAD, PUT, PATCH, POST, DELETE, OPTIONS',
-  'preflightContinue' : false
-};
-
-app.use(cors());
 
 //La fonction app.use() est utilisée pour monter la fonction middleware helmet
 app.use(helmet());

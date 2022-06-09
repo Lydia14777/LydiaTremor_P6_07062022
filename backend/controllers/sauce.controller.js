@@ -13,16 +13,17 @@ exports.createSauce = (req, res, next) => {
     const sauce = new Sauce({
       ...sauceObject,
       //On modifie l'url de l'image
-      imageUrl: `${req.file.filename}`,
+      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
       likes: 0,
       dislikes: 0,
       usersLiked: [],
       usersDisliked: []
     });
+    console.log("waiting for save")
     //Enregistrer 
     sauce.save()
-      .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
+      .then(() => { console.log("sauce créée"); res.status(201).json({ message: 'Objet enregistré !'})})
+      .catch(error => { console.log("sauce error :",error); res.status(400).json({ error })});
 };
 
 //GET : Exporter la fonction getAllSauce

@@ -14,7 +14,7 @@ const sauceSchema = mongoose.Schema({
     //Fabricant de la sauce
     manufacturer: { type: String, required: true },
     //Description de la sauce
-    description: { type: Number, required: true },
+    description: { type: String, required: true },
     //Le principal ingrédient épicé de la sauce
     mainPepper: { type: String, required: false },
     //L'URL de l'image de la sauce téléchargée par l'utilisateur
@@ -26,13 +26,9 @@ const sauceSchema = mongoose.Schema({
     //Nombre d'utilisateurs qui n'aiment pas (= dislike) la sauce
     dislikes: { type: Number, required: false, default:0 },
     //Tableau des identifiants des utilisateurs qui ont aimé (= liked) la sauce
-    usersLiked: { type: Number, required: false, default:'' },
+    usersLiked: { type: [String], required: false, default:[] },
     //Tableau des identifiants des utilisateurs qui n'ont pas aimé (= disliked) la sauce
-    usersDisliked: { type: Number, required: false, default:'' },
-    //Adresse e-mail de l'utilisateur [unique]
-    email: { type: String, required: true },
-    //Mot de passe de l'utilisateur haché
-    password: { type: String, required: true },
+    usersDisliked: { type: [String], required: false, default:[] }
 });
 
 //La méthode model pour exporter ce schéma
