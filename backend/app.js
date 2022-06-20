@@ -70,8 +70,12 @@ app.use(cors(cors_options));
 });
 */
 
+helmet({
+  crossOriginResourcePolicy: false,
+})
+
 //La fonction app.use() est utilisée pour monter la fonction middleware helmet
-app.use(helmet());
+/*app.use(helmet());*/
 
 //Désactive la mise en cache du navigateur
 app.use(nocache());
